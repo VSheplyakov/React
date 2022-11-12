@@ -1,26 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 function Login() {
+  const [userData, setUserData] = useState({ userName: '', password: '' });
+
   function handleFoemSubmit(event) {
     event.preventDefault();
-    const userDate = {
-      username: event.target.username.value,
-      password: event.target.password.value,
-    };
-    alert(JSON.stringify(userDate));
+
+    console.log(userData);
+    alert(JSON.stringify(userData));
   }
 
+  function handleInputChange(text, name) {
+    setUserData({ ...userData, [name]: text.target.value });
+  }
   return (
     <>
       <h1>Login Form</h1>
       <form onSubmit={handleFoemSubmit}>
         <label>
           Username:
-          <input type="text" name="username" />
+          <input
+            type="text"
+            onChange={(e) => handleInputChange(e, 'userName')}
+            value={userData.userName}
+          />
         </label>
         <label>
           Password:
-          <input type="password" name="password" />
+          <input
+            type="password"
+            onChange={(e) => handleInputChange(e, 'password')}
+            value={userData.password}
+          />
         </label>
         <button type="submit">Login</button>
       </form>
